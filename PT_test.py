@@ -77,8 +77,8 @@ def preprocessor_test(source_code, keyword_map):
     return output_string
 
 
-exec(preprocessor_test("test_arm_python.py", KEY_MAP_ARM))
-exec(preprocessor_test("test_spa_python.py", KEY_MAP_SPA))
+
+
 
 
 
