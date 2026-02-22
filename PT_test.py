@@ -3,20 +3,67 @@ import tokenize
 import io
 # Spanish Dictionary 
 KEY_MAP_SPA = {
-    "imprimir": "print",
-
-    "mientras": "while",
-
-    "si": "if",
-
-    "demás": "else",
-    "demÃ¡s": "else",
-
-    "devolver": "return",
-
-    "definir": "def"
+    "como" :"as",
+    'y':'and',
+    "declarar" : "assert",
+   "dejar" : "break",
+    "clase" : "class",
+    "continuar" : "continue",
+    "borrar" : "del",
+    "osi" : "elif",
+    "otro" : "else",
+    "-" : "except",
+    "Falso" : "False",
+    "finalmente" : "finally",
+    "por" : "for",
+    "de" : "from",
+    "mundial" :"global",
+    "si" : "if",
+    "Nada" : "None",
+    "deatras" : "nonlocal",
+    "no" : "not",
+    "o" : "or",
+    "pasar" : "pass",
+    "imprimir" : "print",
+    "levantar" : "raise",
+    "regressar" : "return",
+    "Verdad" : "True",
+    "tratar" : "try",
+    "cuando" : "while",
+    "con" : "with"
 
 }
+tranducir={
+    'y':'and',
+           "declarar" : "assert",
+           "dejar" : "break",
+           "clase" : "class",
+           "continuar" : "continue",
+           "borrar" : "del",
+           "osi" : "elif",
+           "otro" : "else",
+           "-" : "except",
+           "Falso" : "False",
+           "finalmente" : "finally",
+           "por" : "for",
+           "de" : "from",
+           "mundial" :"global",
+           "si" : "if",
+
+           
+           "Nada" : "None",
+           "deatras" : "nonlocal",
+           "no" : "not",
+           "o" : "or",
+           "pasar" : "pass",
+           "levantar" : "raise",
+           "regressar" : "return",
+           "Verdad" : "True",
+           "tratar" : "try",
+           "cuando" : "while",
+           "con" : "with"
+
+           }
 
 # Armenian Dictionary 
 KEY_MAP_ARM = {
@@ -69,16 +116,24 @@ def preprocessor_test(source_code, keyword_map):
     for line in f_p:
         tokens = list(tokenize.generate_tokens(io.StringIO(line).readline))
         new_line = line
-        for member in tokens:
-            if member[0] == 1 and member[1] in keyword_map:
-                new_line = transform_line(new_line,member[2][1],member[3][1],keyword_map[member[1]])
+        for member in tokens: #member[0] 
+            if member[0] == 1 and member[1] in keyword_map: #recocnizes if keyword is type NAME and present in dict
+                position=new_line.find(member[1])
+                new_line = transform_line(new_line,  position,  position+len(member[1]),  keyword_map[member[1]]) #sends specific characters start and end locations on line
         output_string += new_line
     f_p.close()
     return output_string
 
-
-
-
-
+if __name__=="__main__":
+    file_name=(input("1.: "))
+    translation_file=(input("2.: "))
+    translated_dict={}
+    fp = open(translation_file)
+    for line in fp:
+        line = line.split(",")=
+        translated_dict[line[0]]=line[1][:-1]
+    #maps python executable keywords to desired language
+    new_code = preprocessor_test(file_name, translated_dict) 
+    exec(new_code)
 
 
